@@ -6,6 +6,7 @@ import JsWdIoFramework from './js-wdio';
 import PythonFramework from './python';
 import RobotFramework from './robot';
 import RubyFramework from './ruby';
+import Human from './human';
 
 const frameworks = {
   dotNetNUnit: DotNetNUnitFramework,
@@ -16,6 +17,7 @@ const frameworks = {
   python: PythonFramework,
   ruby: RubyFramework,
   robot: RobotFramework,
+  human: Human,
 };
 
 export default frameworks;

@@ -208,6 +208,14 @@ const SelectedElement = (props) => {
             onClick={() => applyClientMethod({methodName: 'click', elementId: selectedElementId})}
           />
         </Tooltip>
+        <Tooltip title={t('Check Visible')}>
+          <Button
+            disabled={isDisabled}
+            icon={tapIcon}
+            id="btnCheckElement"
+            onClick={() => applyClientMethod({methodName: 'getAttribute', elementId: selectedElementId, args: ['displayed']})}
+          />
+        </Tooltip>
         <Button.Group className={styles.elementKeyInputActions}>
           <Input
             className={styles.elementKeyInput}

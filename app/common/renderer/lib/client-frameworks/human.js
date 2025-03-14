@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import Framework from './framework';
 
-class RobotFramework extends Framework {
+class Human extends Framework {
   get language() {
     // Robot highlighting requires highlightjs-robot package
     return 'python';
@@ -59,24 +59,24 @@ ${this.indent(code, 4)}
     if (!suffixMap[strategy]) {
       return this.handleUnsupportedLocatorStrategy(strategy, locator);
     }
-
-    return `$\{${localVar}} =    Set Variable     ${suffixMap[strategy]}=${locator}`;
+    this.locatorVar = `${suffixMap[strategy]}=${locator}`;
+    return null;
   }
 
-  codeFor_click(varName, varIndex) {
-    return `Click Element    $\{${this.getVarName(varName, varIndex)}}`;
+  codeFor_click(locator) {
+    return `{action: "Click Element", locator: "${this.locatorVar}"`;
   }
 
   codeFor_getAttribute(varName, varIndex) {
-    return `Element Should Be Visible    $\{${this.getVarName(varName, varIndex)}}`
+    return `{ "action": "Check visible", "locator": "${this.locatorVar}" }`;
   }
 
   codeFor_clear(varName, varIndex) {
-    return `Clear Text    $\{${this.getVarName(varName, varIndex)}}`;
+    return `{ "action": "Clear Text", "locator": "${this.locatorVar}"`;
   }
 
   codeFor_sendKeys(varName, varIndex, text) {
-    return `Input Text    $\{${this.getVarName(varName, varIndex)}}    ${text}`;
+    return `{action: "Type",key: "${text}", locator: "${this.locatorVar}"`;
   }
 
   codeFor_tap(varNameIgnore, varIndexIgnore, pointerActions) {
@@ -313,6 +313,6 @@ ${varAssignment}Execute Script    ${scriptCmd}    $\{scriptArgument}`;
   }
 }
 
-RobotFramework.readableName = 'Robot Framework';
+Human.readableName = 'Human';
 
-export default RobotFramework;
+export default Human;
