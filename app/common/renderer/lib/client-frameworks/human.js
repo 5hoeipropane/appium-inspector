@@ -64,19 +64,19 @@ ${this.indent(code, 4)}
   }
 
   codeFor_click(locator) {
-    return `{action: "Click Element", locator: "${this.locatorVar}"`;
+    return `{ 'action': 'Click Element', 'locator': '${this.locatorVar}'`;
   }
 
   codeFor_getAttribute(varName, varIndex) {
-    return `{ "action": "Check visible", "locator": "${this.locatorVar}" }`;
+    return `{ 'action': 'Check visible', 'locator': '${this.locatorVar}' }`;
   }
 
   codeFor_clear(varName, varIndex) {
-    return `{ "action": "Clear Text", "locator": "${this.locatorVar}"`;
+    return `{ 'action': 'Clear Text', 'locator': '${this.locatorVar}'`;
   }
 
   codeFor_sendKeys(varName, varIndex, text) {
-    return `{action: "Type",key: "${text}", locator: "${this.locatorVar}"`;
+    return `{ 'action': 'Type', 'key': '${text}', 'locator': '${this.locatorVar}'`;
   }
 
   codeFor_tap(varNameIgnore, varIndexIgnore, pointerActions) {
