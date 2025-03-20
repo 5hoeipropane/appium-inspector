@@ -60,23 +60,117 @@ ${this.indent(code, 4)}
       return this.handleUnsupportedLocatorStrategy(strategy, locator);
     }
     this.locatorVar = `${suffixMap[strategy]}=${locator}`;
+    this.locatorNoPrefix = `${locator}`;
+    this.hint = window.globalSendKeys;
     return null;
   }
 
-  codeFor_click(locator) {
-    return `{ 'action': 'Click Element', 'locator': '${this.locatorVar}'`;
+  codeFor_click(varName, varIndex) {
+    // const hintSnapshot = window.globalSendKeys; // Capture the value at this moment
+    // const hintForUse = hintSnapshot
+    // console.log(`this is hint ${hintForUse}`)
+    const locators = {
+      css: null, 
+      id: null, //element.getAttribute('resource-id') || null, 
+      name: null, 
+      xpath: null,
+      selector: this.locatorVar, 
+      type: "click"
+    }
+    const elementDetails = {
+      tag: null,
+      id: null, //element.getAttribute('id') || null,
+      class: null, //element.getAttribute('class') || null,
+      name: null,
+      value: null, //element.getAttribute('content-desc') || null,
+      text: null, //element.getAttribute('text') || null,
+      placeholder: null,
+    }
+    const returnValue = JSON.stringify({
+      element_details: elementDetails,
+      expectedText: null, //element.getAttribute('content-desc') || null,
+      hint: this.hint,
+      locator: locators,
+    },null, 2)
+    return `${returnValue},`
   }
 
   codeFor_getAttribute(varName, varIndex) {
-    return `{ 'action': 'Check visible', 'locator': '${this.locatorVar}' }`;
+    const locators = {
+      css: null, 
+      id: null, //element.getAttribute('resource-id') || null, 
+      name: null, 
+      xpath: null,
+      selector: this.locatorVar, 
+      type: "verify"
+    }
+    const elementDetails = {
+      tag: null,
+      id: null, //element.getAttribute('id') || null,
+      class: null, //element.getAttribute('class') || null,
+      name: null,
+      value: null, //element.getAttribute('content-desc') || null,
+      text: null, //element.getAttribute('text') || null,
+      placeholder: null,
+    }
+    return JSON.stringify({
+      element_details: elementDetails,
+      expectedText: null, //element.getAttribute('content-desc') || null,
+      hint: window.globalSendKeys,
+      locator: locators,
+    },null, 2)
   }
 
   codeFor_clear(varName, varIndex) {
-    return `{ 'action': 'Clear Text', 'locator': '${this.locatorVar}'`;
+    const locators = {
+      css: null, 
+      id: null, //element.getAttribute('resource-id') || null, 
+      name: null, 
+      xpath: null,
+      selector: this.locatorVar, 
+      type: "clear"
+    }
+    const elementDetails = {
+      tag: null,
+      id: null, //element.getAttribute('id') || null,
+      class: null, //element.getAttribute('class') || null,
+      name: null,
+      value: null, //element.getAttribute('content-desc') || null,
+      text: null, //element.getAttribute('text') || null,
+      placeholder: null,
+    }
+    return JSON.stringify({
+      element_details: elementDetails,
+      expectedText: null, //element.getAttribute('content-desc') || null,
+      hint: null,
+      locator: locators,
+    },null, 2)
   }
 
   codeFor_sendKeys(varName, varIndex, text) {
-    return `{ 'action': 'Type', 'key': '${text}', 'locator': '${this.locatorVar}'`;
+    const locators = {
+      css: null, 
+      id: null, //element.getAttribute('resource-id') || null, 
+      name: null, 
+      xpath: null,
+      selector: this.locatorVar, 
+      type: "input"
+    }
+    const elementDetails = {
+      tag: null,
+      id: null, //element.getAttribute('id') || null,
+      class: null, //element.getAttribute('class') || null,
+      name: null,
+      value: null, //element.getAttribute('content-desc') || null,
+      text: null, //element.getAttribute('text') || null,
+      placeholder: null,
+    }
+    return JSON.stringify({
+      element_details: elementDetails,
+      expectedText: text, //element.getAttribute('content-desc') || null,
+      hint: null,
+      locator: locators,
+    },null, 2)
   }
 
   codeFor_tap(varNameIgnore, varIndexIgnore, pointerActions) {

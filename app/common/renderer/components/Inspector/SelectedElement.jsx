@@ -22,6 +22,7 @@ import styles from './Inspector.module.css';
  * Shows details of the currently selected element and shows methods that can
  * be called on the elements (tap, sendKeys)
  */
+window.globalSendKeys = ''; 
 const SelectedElement = (props) => {
   const {
     applyClientMethod,
@@ -208,14 +209,6 @@ const SelectedElement = (props) => {
             onClick={() => applyClientMethod({methodName: 'click', elementId: selectedElementId})}
           />
         </Tooltip>
-        <Tooltip title={t('Check Visible')}>
-          <Button
-            disabled={isDisabled}
-            icon={tapIcon}
-            id="btnCheckElement"
-            onClick={() => applyClientMethod({methodName: 'getAttribute', elementId: selectedElementId, args: ['displayed']})}
-          />
-        </Tooltip>
         <Button.Group className={styles.elementKeyInputActions}>
           <Input
             className={styles.elementKeyInput}
@@ -270,6 +263,36 @@ const SelectedElement = (props) => {
               id="btnGetTiming"
               icon={<HourglassOutlined />}
               onClick={() => getFindElementsTimes(findDataSource)}
+            />
+          </Tooltip>
+        </Button.Group>
+      </Row>
+      <Row>
+      <Button.Group className={styles.elementKeyInputActions}>
+          <Input
+            className={styles.elementKeyInput}
+            disabled={isDisabled}
+            placeholder={t('Enter Hint Text')}
+            allowClear={true}
+            onChange={(e) => {
+              sendKeys.current = e.target.value
+              window.globalSendKeys = e.target.value;
+            }}
+          />
+          <Tooltip title={t('Tap')}>
+            <Button
+              disabled={isDisabled}
+              icon={tapIcon}
+              id="btnTapElement"
+              onClick={() => applyClientMethod({methodName: 'click', elementId: selectedElementId})}
+            />
+          </Tooltip>
+          <Tooltip title={t('Check Visible')}>
+            <Button
+              disabled={isDisabled}
+              icon={<CopyOutlined />}
+              id="btnCheckElement"
+              onClick={() => applyClientMethod({methodName: 'getAttribute', elementId: selectedElementId, args: ['displayed']})}
             />
           </Tooltip>
         </Button.Group>
