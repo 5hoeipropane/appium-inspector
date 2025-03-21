@@ -116,7 +116,7 @@ ${this.indent(code, 4)}
     return JSON.stringify({
       element_details: elementDetails,
       expectedText: null, //element.getAttribute('content-desc') || null,
-      hint: window.globalSendKeys,
+      hint: this.hint,
       locator: locators,
     },null, 2)
   }
@@ -127,7 +127,7 @@ ${this.indent(code, 4)}
       id: null, //element.getAttribute('resource-id') || null, 
       name: null, 
       xpath: null,
-      selector: this.locatorVar, 
+      selector: this.hint,
       type: "clear"
     }
     const elementDetails = {
