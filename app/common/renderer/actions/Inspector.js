@@ -293,12 +293,13 @@ export function applyClientMethod(params) {
         strategy,
         selector,
       } = await callAction(dispatch, getState);
+      const hintDetail = window.globalSendKeys;
 
       // TODO: Implement recorder code for gestures
       if (isRecording) {
         // Add 'findAndAssign' line of code. Don't do it for arrays though. Arrays already have 'find' expression
         if (strategy && selector && !variableIndex && variableIndex !== 0) {
-          const findAction = findAndAssign(strategy, selector, variableName, false);
+          const findAction = findAndAssign(strategy, selector, variableName, hintDetail);
           findAction(dispatch, getState);
         }
 

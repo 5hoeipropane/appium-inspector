@@ -43,7 +43,7 @@ ${this.indent(code, 4)}
     return `# ${comment}`;
   }
 
-  codeFor_findAndAssign(strategy, locator, localVar /*, isArray*/) {
+  codeFor_findAndAssign(strategy, locator, localVar, hintDetail /*, isArray*/) {
     let suffixMap = {
       xpath: 'xpath',
       'accessibility id': 'accessibility_id',
@@ -61,7 +61,7 @@ ${this.indent(code, 4)}
     }
     this.locatorVar = `${suffixMap[strategy]}=${locator}`;
     this.locatorNoPrefix = `${locator}`;
-    this.hint = window.globalSendKeys;
+    this.hint = hintDetail;
     return null;
   }
 

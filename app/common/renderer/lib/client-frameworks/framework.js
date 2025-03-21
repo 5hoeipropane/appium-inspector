@@ -94,14 +94,14 @@ export default class Framework {
 
   // Common entrypoints for code generation
 
-  codeFor_findElement(strategy, locator) {
+  codeFor_findElement(strategy, locator, hintDetail) {
     let [localVar, wasNew] = this.getVarForFind(strategy, locator);
     if (!wasNew) {
       // if we've already found this element, don't print out
       // finding it again
       return '';
     }
-    return this.codeFor_findAndAssign(strategy, locator, localVar);
+    return this.codeFor_findAndAssign(strategy, locator, localVar, hintDetail);
   }
 
   // Execute Script

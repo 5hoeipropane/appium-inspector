@@ -36,6 +36,7 @@ export default class AppiumClient {
       skipScreenshot = false, // Optional. Do we want to skip getting screenshot alone?
       appMode = APP_MODE.NATIVE, // Optional. Whether we're in a native or hybrid mode
     } = params;
+    const hintDetail = window.globalSendKeys;
 
     if (methodName === 'quit') {
       try {
@@ -79,10 +80,10 @@ export default class AppiumClient {
     } else if (strategy && selector) {
       if (fetchArray) {
         log.info(`Fetching elements with selector '${selector}' and strategy ${strategy}`);
-        res = await this.fetchElements({strategy, selector});
+        res = await this.fetchElements({strategy, selector, hintDetail});
       } else {
         log.info(`Fetching an element with selector '${selector}' and strategy ${strategy}`);
-        res = await this.fetchElement({strategy, selector});
+        res = await this.fetchElement({strategy, selector, hintDetail});
       }
     }
 
@@ -151,9 +152,9 @@ export default class AppiumClient {
     };
   }
 
-  async fetchElements({strategy, selector}) {
+  async fetchElements({strategy, selector, hintDetail}) {
     const start = Date.now();
-    const els = await this.driver.findElements(strategy, selector);
+    const els = await this.driver.findElements(strategy, selector, hintDetail);
     const executionTime = Date.now() - start;
 
     this.elArrayVarCount += 1;
@@ -188,11 +189,11 @@ export default class AppiumClient {
     };
   }
 
-  async fetchElement({strategy, selector}) {
+  async fetchElement({strategy, selector, hintDetail}) {
     const start = Date.now();
     let element = null;
     try {
-      element = await this.driver.findElement(strategy, selector);
+      element = await this.driver.findElement(strategy, selector, hintDetail);
     } catch {
       return {};
     }
