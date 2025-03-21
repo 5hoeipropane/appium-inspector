@@ -149,6 +149,29 @@ const LocatedElements = (props) => {
                 </Button.Group>
               </Space>
             </Row>
+            <Row justify="center">
+              <Button.Group className={InspectorStyles.searchResultsActions}>
+                <Input
+                  className={InspectorStyles.searchResultsKeyInput}
+                  disabled={!locatorTestElement}
+                  placeholder={t('Enter Hint Text')}
+                  allowClear={true}
+                  onChange={(e) => {
+                    sendKeys.current = e.target.value
+                    window.globalSendKeys = e.target.value;
+                  }}
+                />
+                <Tooltip title={t('Tap')} placement="bottom">
+                  <Button
+                    disabled={!locatorTestElement}
+                    icon={<AimOutlined />}
+                    onClick={() =>
+                      applyClientMethod({methodName: 'click', elementId: locatorTestElement})
+                    }
+                  />
+                </Tooltip>
+              </Button.Group>
+            </Row>
           </Space>
         </Spin>
       )}

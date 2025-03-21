@@ -267,7 +267,7 @@ const SelectedElement = (props) => {
           </Tooltip>
         </Button.Group>
       </Row>
-      <Row>
+      <Row justify="center">
       <Button.Group className={styles.elementKeyInputActions}>
           <Input
             className={styles.elementKeyInput}
