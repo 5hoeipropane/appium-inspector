@@ -91,6 +91,7 @@ ${this.indent(code, 4)}
       expectedText: null, //element.getAttribute('content-desc') || null,
       hint: this.hint,
       selector: this.locatorVar,
+      type: "click"
     },null, 2)
     return `${returnValue},`
   }
@@ -118,6 +119,7 @@ ${this.indent(code, 4)}
       expectedText: null, //element.getAttribute('content-desc') || null,
       hint: this.hint,
       selector: this.locatorVar,
+      type: "verify"
     },null, 2)
   }
 
@@ -144,6 +146,7 @@ ${this.indent(code, 4)}
       expectedText: null, //element.getAttribute('content-desc') || null,
       hint: this.hint,
       selector: this.locatorVar,
+      type: "clear"
     },null, 2)
   }
 
@@ -170,6 +173,7 @@ ${this.indent(code, 4)}
       expectedText: text, //element.getAttribute('content-desc') || null,
       hint: this.hint,
       selector: this.locatorVar,
+      type: "input"
     },null, 2)
   }
 
