@@ -142,7 +142,7 @@ ${this.indent(code, 4)}
     return JSON.stringify({
       element_details: elementDetails,
       expectedText: null, //element.getAttribute('content-desc') || null,
-      hint: null,
+      hint: this.hint,
       selector: this.locatorVar,
     },null, 2)
   }
@@ -168,7 +168,7 @@ ${this.indent(code, 4)}
     return JSON.stringify({
       element_details: elementDetails,
       expectedText: text, //element.getAttribute('content-desc') || null,
-      hint: null,
+      hint: this.hint,
       selector: this.locatorVar,
     },null, 2)
   }
